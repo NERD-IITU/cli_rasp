@@ -6,7 +6,7 @@ for i in range(13765, 14246):
     querystring = {"block_id": str(i)}
     response = requests.request("GET", url, params = querystring)
     e = response.text.encode('utf-8')
-    with open(f"{i}.json", "ab") as f:
+    with open(f"data/{i}.json", "ab") as f:
         f.write(e)
 
 
