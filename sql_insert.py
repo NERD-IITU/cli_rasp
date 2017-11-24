@@ -31,10 +31,10 @@ for day in days:
 list_of_empty_blocks = []
 for file in range(13765,14245):
     loaded_json = {}
-    with open(f"{file}.json", "br") as innerfile:
+    with open(f"data/{file}.json", "br") as innerfile:
         loaded_json = json.loads(innerfile.read().decode("utf-8"))
     if not loaded_json["timetable"]:
-        print(f"{file}.json is empty. I\'m passing!")
+        print(f"data/{file}.json is empty. I\'m passing!")
         list_of_empty_blocks.append(file)
         continue
 
@@ -115,7 +115,7 @@ for file in range(13765,14245):
 for file in range(13765,14245):
     loaded_json = {}
     if file not in list_of_empty_blocks:
-        with open(f"{file}.json", "br") as innerfile:
+        with open(f"data/{file}.json", "br") as innerfile:
             loaded_json = json.loads(innerfile.read().decode("utf-8"))
         for day in loaded_json['timetable']:
             for liltime in loaded_json['timetable'][day]:
