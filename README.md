@@ -20,4 +20,8 @@ Forthly, you launch `sql_insert.py`
 
 Those last two create from `data/\*.json` pretty normal SQLite3-compatible db.
 
+Fifthly you need to launch `python3 meta_json_creator.py`
+
+That script creates meta_json_files with which you can search without requesting to the db
+
 That's what I've got for a while
