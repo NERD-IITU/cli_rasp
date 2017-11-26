@@ -68,12 +68,12 @@ class Time(Base):
         self.end_time = end_time
 
 
-
-
 class Timetable(Base):
 
-    __tablename__='timetable'
+    __tablename__ = 'timetable'
+    __table_args__ = {'sqlite_autoincrement': True}
     id = Column(Integer, primary_key=True)
+    schedid = Column(Integer)
     weekid = Column(Integer, ForeignKey('week.id'))
     week = relationship(Week)
     blockid = Column(Integer, ForeignKey('blocks.id'))
@@ -86,17 +86,17 @@ class Timetable(Base):
     times = relationship(Time)
     subjectid = Column(Integer, ForeignKey('subjects.id'))
     subjects = relationship(Subject)
+    belongsto = Column(Integer, nullable=False)
 
-
-    def __init__(self,id,weekid,blockid,bundleid,teacherid,timeid,subjectid):
-        self.id = id
+    def __init__(self,schedid,weekid,blockid,bundleid,teacherid,timeid,subjectid, belongsto):
+        self.schedid =schedid
         self.weekid = weekid
         self.blockid = blockid
         self.bundleid = bundleid
         self.teacherid = teacherid
         self.timeid = timeid
         self.subjectid = subjectid
-
+        self.belongsto = belongsto
 
 
 engine = create_engine('sqlite:///schedule.db')

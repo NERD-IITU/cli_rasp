@@ -55,7 +55,7 @@ for file in range(13765,14245):
                 bundle_name = ""
                 print("bundle: "+another_bundle)
                 for innername in loaded_json['bundles'][another_bundle]['name']:
-                    bundle_name+=innername['name_en']+" "
+                    bundle_name += innername['name_en']+" "
 
                 new_bundle = Bundle(id=int(another_bundle), name=bundle_name)
                 try:
@@ -112,7 +112,8 @@ for file in range(13765,14245):
             print(e)
             session.rollback()
 
-for file in range(13765,14245):
+success_on_timetable = 0
+for file in range(13765, 14245):
     loaded_json = {}
     if file not in list_of_empty_blocks:
         with open(f"data/{file}.json", "br") as innerfile:
@@ -126,25 +127,29 @@ for file in range(13765,14245):
                 bundle_id = loaded_json['timetable'][day][liltime][0]['bundle_id']
                 week_id = loaded_json['timetable'][day][liltime][0]['day_id']
                 time_id = loaded_json['timetable'][day][liltime][0]['time_id']
+                belongs_to = int(file)
+                try:
+                    session.add(new_timetable)
+                    session.commit()
+                    print("SUCCESS on timetable")
+                    success_on_timetable+=1
+                except Exception as e:
+                    print(e)
+                    print("TIMETABLE ERROR")
+                    session.rollback()
 
-                new_timetable = Timetable(id=int(timetable_id),
+                new_timetable = Timetable(schedid=int(timetable_id),
                                           weekid=int(week_id),
                                           blockid=int(block_id),
                                           bundleid=int(bundle_id),
                                           teacherid=int(teacher_id),
                                           subjectid=int(subject_id),
-                                          timeid=int(time_id)
-                                          )
-                try:
-                    session.add(new_timetable)
-                    session.commit()
-                    print("SUCCESS on timetable")
-                except Exception as e:
-                    print(e)
-                    print("TIMETABLE ERROR")
-                    session.rollback()
+                                          timeid=int(time_id),
+                                          belongsto=int(belongs_to))
     else:
         continue
+
+print(f"successes on timetable was {success_on_timetable}")
 
 # At least somewhere it needs to be closed!
 session.close()
