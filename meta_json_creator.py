@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import json
 
-engine = create_engine('sqlite:///sched.db')
+engine = create_engine('sqlite:///schedule.db')
 Base.metadata.bind = engine
 
 DBSession = sessionmaker(bind=engine)
@@ -25,16 +25,16 @@ for block_name, block_id in query_blocks:
 with open('blocks.json','w') as f:
     json.dump(blocks_dict, f)
 
-
-bundles_dict={}
-query_bundles = session.query(Bundle.name, Bundle.id)
-for bundle_name, bundle_id in query_bundles:
-    bundles_dict[bundle_name.lower()] = bundle_id
-
-    #print(f"{bundle_name}:{bundle_id}")
-
-with open('bundles.json','w') as f:
-    json.dump(bundles_dict, f)
+# useless
+# bundles_dict={}
+# query_bundles = session.query(Bundle.name, Bundle.id)
+# for bundle_name, bundle_id in query_bundles:
+#     bundles_dict[bundle_name.lower()] = bundle_id
+#
+#     #print(f"{bundle_name}:{bundle_id}")
+#
+# with open('bundles.json','w') as f:
+#     json.dump(bundles_dict, f)
 
 
 teachers_dict={}
@@ -54,13 +54,14 @@ with open('blocks.json', 'r') as f:
 for block in blocks_dict:
     print(f"{block.lower()} : {blocks_dict[block]}")
 
-bundles_dict.clear()
-
-with open('bundles.json', 'r') as f:
-    bundles_dict = json.load(f)
-
-for bundle in bundles_dict:
-    print(f"{bundle.lower()} : {bundles_dict[bundle]}")
+# useless
+# bundles_dict.clear()
+#
+# with open('bundles.json', 'r') as f:
+#     bundles_dict = json.load(f)
+#
+# for bundle in bundles_dict:
+#     print(f"{bundle.lower()} : {bundles_dict[bundle]}")
 
 teachers_dict.clear()
 
