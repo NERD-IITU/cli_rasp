@@ -1,0 +1,25 @@
+[ *  - further
+  ** - moar further]
+
+* create config.json file for launch preferences
+  consisting of some specific table already
+
+* office hours of exact teacher
+* free rooms
+
+* clr lib usage for:
+  printing colorful output:
+    consisting of current time subject
+    consisting of upcoming time subject
+
+* separate `Display` class into another file (display.py or who the hell knows)
+   and use Display(Block|Teacher|Bundle) out of that place
+
+* main must contain only launch options
+
+* create environmental reqs.txt (I've just created reqs.txt occasionally, needs to be specified)
+
+* create bash installer, which is going to do all in README.md on its own
+
+** make cli_rasp's web interface like wttr.in
+
